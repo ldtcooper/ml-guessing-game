@@ -1,1 +1,2 @@
-# ml-guessing-game
+# Untitled ML Guessing Game
+This repo is a simple game I'm working on. In this game you will be presented with some synthetic data and a decision boundary and asked to guess what kind of classification algorithm was used. 
