@@ -14,6 +14,9 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+import matplotlib.pyplot as plt
+import mpld3
+
 HyperparamValue = Union[str, int, float, None]
 
 ALGO_CHOICES = [
@@ -81,9 +84,9 @@ class Problem():
     def train_model(self) -> BaseEstimator:
         return self.model(**self.hyperparams).fit(self.X_train, self.y_train)
 
-    def make_decision_plot(self) -> None:
+    def make_decision_plot(self) -> str:
         disp = DecisionBoundaryDisplay.from_estimator(
             estimator=self.model, X=self.X_train, alpha=0.5, xlabel="Feature One", ylabel="Feature Two", eps=0.11)
         disp.ax_.scatter(
             self.X_test[:, 0], self.X_test[:, 1], c=self.y_test, edgecolors='k')
-        plt.savefig('./img.png')
+        return mpld3.fig_to_html(fig=disp.figure_)

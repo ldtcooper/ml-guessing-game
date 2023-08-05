@@ -1,9 +1,15 @@
 from flask import Flask
+from problem_gen import Problem
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return "<h1>Hello World!</h1>"
 
-@app.route("")
+
+@app.route("/problem")
+def get_problem_graph():
+    p = Problem()
+    return p.make_decision_plot()
