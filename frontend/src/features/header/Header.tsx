@@ -7,7 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Header() {
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, height: '5%' }}>
             <AppBar position="static" sx={
                 {
                     padding: '5px',
@@ -18,11 +18,11 @@ function Header() {
             }>
                 <Typography align='left' component='p' variant='h6'>Modle: The ML Guessing Game</Typography>
                 <Box sx={{ gridColumn: 3, display: 'flex', justifyContent: 'space-around' }}>
-                    <a href="https://www.linkedin.com/in/ldtcooper/">
+                    <a href="https://www.linkedin.com/in/ldtcooper/" target='_blank' rel="noreferrer">
                         <LinkedInIcon sx={{ color: 'white' }} />
                         <span className='accessibility-text'>LinkedIn</span>
                     </a>
-                    <a href="https://github.com/ldtcooper/ml-guessing-game/">
+                    <a href="https://github.com/ldtcooper/ml-guessing-game/" target='_blank' rel="noreferrer">
                         <GitHubIcon sx={{ color: 'white' }} />
                         <span className='accessibility-text'>GitHub</span>
                     </a>
