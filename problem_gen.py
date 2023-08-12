@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, Union
+from typing import Tuple, Dict, Union, List
 from random import randint, choice
 import numpy as np
 
@@ -57,7 +57,7 @@ class Problem():
         return c
 
     def choose_hyperparams(self) -> Dict[str, HyperparamValue]:
-        hyperparams = {
+        HYPERPARAMS = {
             "AdaBoost": {},
             "DecisionTree": {
                 "criterion": ["gini", "entropy", "log_loss"],
@@ -78,7 +78,7 @@ class Problem():
             "NaiveBayes": {},
         }
 
-        hyperparams_set = hyperparams[self.algo]
+        hyperparams_set = HYPERPARAMS[self.algo]
         return {k: choice(hyperparams_set[k]) for k in hyperparams_set.keys()}
 
     def train_model(self) -> BaseEstimator:
@@ -93,3 +93,7 @@ class Problem():
 
     def get_table_data(self) -> Tuple[str]:
         return (self.algo, self.hyperparams)
+
+    @classmethod
+    def get_answer_options(cls) -> List[str]:
+        return [el[0] for el in ALGO_CHOICES]

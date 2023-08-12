@@ -60,6 +60,11 @@ def check_solution():
     return resp
 
 
+@app.route('/answers', methods=['GET'])
+def get_answer_options():
+    return Problem.get_answer_options()
+
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
