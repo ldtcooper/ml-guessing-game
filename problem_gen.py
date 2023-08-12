@@ -23,7 +23,7 @@ ALGO_CHOICES = [
     ("AdaBoost", AdaBoostClassifier),
     ("DecisionTree", DecisionTreeClassifier),
     ("LogisticRegression", LogisticRegressionCV),
-    ("SupportVector", SVC),
+    ("SupportVectorMachine", SVC),
     ("NeuralNet", MLPClassifier),
     ("NaiveBayes", GaussianNB)
 ]
@@ -67,7 +67,7 @@ class Problem():
                 "penalty": [None, 'l1', 'l2'],
                 "solver": ["saga"]
             },
-            "SupportVector": {
+            "SupportVectorMachine": {
                 "kernel": ["linear", "poly", "rbf", "sigmoid"],
             },
             "NeuralNet": {
