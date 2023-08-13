@@ -5,15 +5,16 @@ import { selectGuess } from './guesserSlice';
 import { useAppSelector } from '../../app/hooks';
 import Success from '../success/success';
 import Dropdown from '../controls/dropdown';
+import PlayAgain from '../controls/playagain';
 
 
 function Guesser() {
-    const { options, graph, isCorrect } = useAppSelector(selectGuess);
+    const { graph, isCorrect } = useAppSelector(selectGuess);
     return (
         <Box>
             {isCorrect == null ? null : <Success />}
             <div id='graph-container' />
-            <Dropdown />
+            {isCorrect == null ? <Dropdown /> : <PlayAgain />}
         </Box>
     );
 }

@@ -10,7 +10,7 @@ export interface GuesserState {
 };
 
 const initialState: GuesserState = {
-    options: ['a', 'b', 'c'],
+    options: [],
     answer: '',
     graph: null,
     isCorrect: null
