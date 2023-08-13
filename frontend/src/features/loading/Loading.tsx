@@ -6,8 +6,7 @@ import { useAppSelector } from '../../app/hooks';
 import { selectLoading } from './loadingSlice';
 
 function Loading() {
-    const loading = useAppSelector(selectLoading);
-
+    const { loading } = useAppSelector(selectLoading);
     return (
         loading ? (
             <Box sx={{
