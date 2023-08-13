@@ -6,6 +6,7 @@ import { useAppSelector } from '../../app/hooks';
 import Success from '../success/success';
 import Dropdown from '../controls/dropdown';
 import PlayAgain from '../controls/playagain';
+import Graph from '../graph/graph';
 
 
 function Guesser() {
@@ -13,7 +14,7 @@ function Guesser() {
     return (
         <Box>
             {isCorrect == null ? null : <Success />}
-            <div id='graph-container' />
+            <Graph graphHtml={graph} />
             {isCorrect == null ? <Dropdown /> : <PlayAgain />}
         </Box>
     );

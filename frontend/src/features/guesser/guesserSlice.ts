@@ -5,14 +5,14 @@ import { Nullable } from "../../app/types";
 export interface GuesserState {
     options: Array<string>,
     answer: string,
-    graph: Nullable<string>,
+    graph: string,
     isCorrect: Nullable<boolean>,
 };
 
 const initialState: GuesserState = {
     options: [],
     answer: '',
-    graph: null,
+    graph: '',
     isCorrect: null
 };
 
