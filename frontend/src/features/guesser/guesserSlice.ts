@@ -1,16 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-type Nullable<T> = T | null;
+import { RootState } from "../../app/store";
+import { Nullable } from "../../app/types";
 
 export interface GuesserState {
     options: Array<string>,
-    answer: Nullable<string>,
+    answer: string,
     graph: Nullable<string>,
     isCorrect: Nullable<boolean>,
 };
 
 const initialState: GuesserState = {
-    options: [],
-    answer: null,
+    options: ['a', 'b', 'c'],
+    answer: '',
     graph: null,
     isCorrect: null
 };
@@ -35,5 +36,7 @@ export const guesserSlice = createSlice({
 });
 
 export const { setOptions, setAnswer, setGraphHTML, setIsCorrect } = guesserSlice.actions;
+
+export const selectGuess = (state: RootState) => state.guesser;
 
 export default guesserSlice.reducer;
