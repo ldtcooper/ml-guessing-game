@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Nullable } from "../../app/types";
+import { fetchAnswers, fetchProblem, checkAnswer } from "./guesserAPI";
 
 export interface GuesserState {
     options: Array<string>,
@@ -15,6 +16,31 @@ const initialState: GuesserState = {
     graph: '',
     isCorrect: null
 };
+
+export const getAnswerOptions = createAsyncThunk(
+    'guesser/getAnswerOptions',
+    async () => {
+        const resp = await fetchAnswers();
+        return resp;
+    }
+)
+
+export const getAnswerCheck = createAsyncThunk(
+    'guesser/checkAnswer',
+    async (body) => {
+        debugger;
+        // const resp = await checkAnswer(body.id, body.algo);
+        // return resp;
+    }
+)
+
+export const getProblem = createAsyncThunk(
+    'guesser/fetchProblem',
+    async () => {
+        const resp = await fetchProblem();
+        return resp;
+    }
+);
 
 export const guesserSlice = createSlice({
     name: 'guesser',
@@ -32,6 +58,18 @@ export const guesserSlice = createSlice({
         setIsCorrect: (state, action: PayloadAction<boolean>) => {
             state.isCorrect = action.payload;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getAnswerOptions.fulfilled, (state, action) => {
+                state.options = action.payload;
+            })
+            .addCase(getAnswerCheck.fulfilled, (state, action) => {
+
+            })
+            .addCase(getProblem.fulfilled, (state, action) => {
+
+            })
     }
 });
 

@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { getAnswerOptions, getProblem, getAnswerCheck } from "../guesser/guesserSlice";
 
 export interface LoadingState {
     loading: boolean,
@@ -16,6 +17,27 @@ export const loadingSlice = createSlice({
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getAnswerOptions.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getAnswerOptions.fulfilled, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(getProblem.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getProblem.fulfilled, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(getAnswerCheck.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getAnswerCheck.fulfilled, (state, action) => {
+                state.loading = false;
+            })
     }
 });
 

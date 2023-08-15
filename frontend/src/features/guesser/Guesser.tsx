@@ -12,7 +12,7 @@ import Graph from '../graph/graph';
 function Guesser() {
     const { graph, isCorrect } = useAppSelector(selectGuess);
     return (
-        <Box>
+        <Box sx={{ height: "100%" }}>
             {isCorrect == null ? null : <Success />}
             <Graph graphHtml={graph} />
             {isCorrect == null ? <Dropdown /> : <PlayAgain />}

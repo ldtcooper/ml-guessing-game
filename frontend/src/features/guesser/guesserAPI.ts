@@ -2,6 +2,10 @@ interface ProblemResponse {
     html: string,
     id: number
 }
+interface CheckResponse {
+    correct: boolean,
+    algo: string
+}
 
 // export function fetchAnswers(): Array<string> {
 //     return fetch('/answers', { method: 'GET' })
@@ -11,7 +15,7 @@ interface ProblemResponse {
 //     return fetch('/problem', { method: 'GET' })
 // }
 
-// export function checkAnswer(id: number, algo: string) {
+// export function checkAnswer(id: number, algo: string): Promise<CheckResponse> {
 //     return fetch('/check', {
 //         method: 'POST',
 //         body: JSON.stringify({ id, algo })
@@ -37,7 +41,7 @@ export function fetchAnswers(): Promise<Array<string>> {
     )
 }
 
-export function checkAnswer(_id: number, algo: string) { // id is only important for reading from DB
+export function checkAnswer(_id: number, algo: string): Promise<CheckResponse> { // id is only important for reading from DB
     const answer = 'DecisionTree';
     return mockAPICall(
         { "correct": algo === answer, answer },
