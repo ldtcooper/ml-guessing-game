@@ -2079,3 +2079,5 @@ if (typeof module === "object" && module.exports) {
 }
 
 console.log("Loaded mpld3 version " + mpld3.version);
+
+export default mpld3;
