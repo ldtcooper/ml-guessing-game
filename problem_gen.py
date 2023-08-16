@@ -89,7 +89,7 @@ class Problem():
             estimator=self.model, X=self.X_train, alpha=0.5, xlabel="Feature One", ylabel="Feature Two", eps=0.11)
         disp.ax_.scatter(
             self.X_test[:, 0], self.X_test[:, 1], c=self.y_test, edgecolors='k')
-        return mpld3.fig_to_html(fig=disp.figure_)
+        return mpld3.fig_to_dict(fig=disp.figure_)
 
     def get_table_data(self) -> Tuple[str]:
         return (self.algo, self.hyperparams)

@@ -46,7 +46,7 @@ def get_problem_graph():
     db.session.add(game)
     db.session.commit()
     print(game)
-    return {"html": p.make_decision_plot(), "id": game.id}
+    return {"graph": p.make_decision_plot(), "id": game.id}
 
 
 @app.route('/check', methods=['POST'])
