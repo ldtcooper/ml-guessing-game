@@ -4,6 +4,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectGuess, setAnswer } from '../guesser/guesserSlice';
 
@@ -12,21 +15,24 @@ function Dropdown() {
     const dispatch = useAppDispatch();
 
     return (
-        <Box sx={{ minWidth: 120 }}>
-            <FormControl sx={{ width: '12%' }}>
-                <InputLabel id="demo-simple-select-label">Choose an Algorithm</InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={answer}
-                    label="Age"
-                    onChange={(e => dispatch(setAnswer(e.target.value)))}
-                >
-                    {
-                        options.map((el) => <MenuItem value={el} key={el}> {el}</MenuItem>)
-                    }
-                </Select>
-            </FormControl>
+        <Box>
+            <Stack spacing={2} direction="row">
+                <FormControl sx={{ width: 350 }}>
+                    <InputLabel id="demo-simple-select-label">Choose an Algorithm</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={answer}
+                        label="Choose an Algorithm"
+                        onChange={(e => dispatch(setAnswer(e.target.value)))}
+                    >
+                        {
+                            options.map((el) => <MenuItem value={el} key={el}> {el}</MenuItem>)
+                        }
+                    </Select>
+                </FormControl>
+                <Button variant='outlined'>Submit</Button>
+            </Stack>
         </Box >
     );
 }
