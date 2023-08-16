@@ -6,14 +6,16 @@ import { fetchAnswers, fetchProblem, checkAnswer } from "./guesserAPI";
 export interface GuesserState {
     options: Array<string>,
     answer: string,
-    graph: string,
+    graph: Object,
+    id: Nullable<number>,
     isCorrect: Nullable<boolean>,
 };
 
 const initialState: GuesserState = {
     options: [],
     answer: '',
-    graph: '',
+    graph: {},
+    id: null,
     isCorrect: null
 };
 
@@ -68,7 +70,8 @@ export const guesserSlice = createSlice({
 
             })
             .addCase(getProblem.fulfilled, (state, action) => {
-
+                state.graph = action.payload.graph;
+                state.id = action.payload.id;
             })
     }
 });
