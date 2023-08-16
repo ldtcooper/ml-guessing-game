@@ -12,7 +12,7 @@ function Guesser() {
     return (
         <Box sx={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             {isCorrect == null ? null : <Success />}
-            <Graph graphHtml={graph} />
+            <Graph graphJson={graph} />
             {isCorrect == null ? <Dropdown /> : <PlayAgain />}
         </Box>
     );
