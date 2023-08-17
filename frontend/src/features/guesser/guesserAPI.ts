@@ -1,4 +1,4 @@
-import { CheckResponse, ProblemResponse } from "../../app/types";
+import { CheckResponse, DeleteResponse, ProblemResponse } from "../../app/types";
 
 
 // export function fetchAnswers(): Array<string> {
@@ -14,6 +14,13 @@ import { CheckResponse, ProblemResponse } from "../../app/types";
 //     return fetch('/check', {
 //         method: 'POST',
 //         body: JSON.stringify({ id, algo })
+//     })
+// }
+
+// export function deleteGame(id: number): Promise<DeleteResponse> {
+//     return fetch('/delete', {
+//         method: 'DELETE',
+//         body: JSON.stringify({ id }),
 //     })
 // }
 

@@ -13,3 +13,7 @@ export interface CheckBody {
     id: number,
     algo: string,
 }
+
+export interface DeleteResponse {
+    deleted: number
+}
