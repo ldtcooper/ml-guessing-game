@@ -6,15 +6,17 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 
+import "./score.css";
+
 const getWinRate = (played: number, won: number): string => {
     const rawRate = (won / played) * 100
     return rawRate.toFixed(2);
 }
 
-function GameCount() {
+function Score() {
     const { gamesPlayed, gamesWon } = useAppSelector(selectGuess);
     return (
-        <Card sx={{ position: "absolute", top: '10%', right: '10%', maxWidth: '15%', padding: '30px' }}>
+        <Card id="score">
             {
                 gamesPlayed === 0 ?
                     <Typography align='left' paragraph>Your score will go here once it stops being <code>RangeError: BigInt divide by zero</code></Typography> : (
@@ -27,4 +29,4 @@ function GameCount() {
     )
 }
 
-export default GameCount;
+export default Score;

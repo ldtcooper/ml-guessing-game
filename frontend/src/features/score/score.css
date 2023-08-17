@@ -1,0 +1,19 @@
+#score {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    max-width: 15%;
+    padding: 30px;
+}
+
+@media screen and (max-width: 1365px) {
+    #score {
+        top: 75%;
+        padding: 30px;
+    }
+
+    #description {
+        justify-self: left;
+        margin: 10px 50% 0 5%;
+    }
+}
