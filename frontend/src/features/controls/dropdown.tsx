@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectGuess, setAnswer } from '../guesser/guesserSlice';
+import { selectGuess, setAnswer, getAnswerCheck } from '../guesser/guesserSlice';
 
 function Dropdown() {
     const { answer, options } = useAppSelector(selectGuess);
@@ -31,7 +31,13 @@ function Dropdown() {
                         }
                     </Select>
                 </FormControl>
-                <Button variant='outlined'>Submit</Button>
+                <Button
+                    variant='outlined'
+                    onClick={() => { dispatch(getAnswerCheck({ id: -1, algo: answer })) }}
+                    disabled={answer === ''}
+                >
+                    Submit
+                </Button>
             </Stack>
         </Box >
     );

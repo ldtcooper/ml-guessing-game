@@ -6,11 +6,11 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 function Success() {
-    const { answer, isCorrect } = useAppSelector(selectGuess);
+    const { correctAlgo, isCorrect } = useAppSelector(selectGuess);
     return (
         <Box>
             <Typography variant='h2'>{isCorrect ? 'Correct!' : 'Incorrect!'}</Typography>
-            {isCorrect ? null : <Typography variant='h5'>The correct answer was "{answer}".</Typography>}
+            {isCorrect ? null : <Typography variant='h5'>The correct answer was "{correctAlgo}".</Typography>}
         </Box>
 
     )

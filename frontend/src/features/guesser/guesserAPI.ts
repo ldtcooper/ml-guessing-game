@@ -1,15 +1,10 @@
-interface ProblemResponse {
-    graph: Object,
-    id: number
-}
-interface CheckResponse {
-    correct: boolean,
-    algo: string
-}
+import { CheckResponse, ProblemResponse } from "../../app/types";
+
 
 // export function fetchAnswers(): Array<string> {
 //     return fetch('/answers', { method: 'GET' })
 // }
+
 
 // export function fetchProblem(): ProblemResponse {
 //     return fetch('/problem', { method: 'GET' })
@@ -44,7 +39,7 @@ export function fetchAnswers(): Promise<Array<string>> {
 export function checkAnswer(_id: number, algo: string): Promise<CheckResponse> { // id is only important for reading from DB
     const answer = 'DecisionTree';
     return mockAPICall(
-        { "correct": algo === answer, answer },
+        { correct: algo === answer, algo: answer },
         randomTimeout(),
     )
 }
