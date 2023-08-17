@@ -5,6 +5,7 @@ import './App.css';
 import Guesser from './features/guesser/Guesser';
 import { getAnswerOptions, getProblem } from './features/guesser/guesserSlice';
 import { useAppDispatch } from './app/hooks';
+import GameCount from './features/game-count/game-count';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Header />
       <Guesser />
       <Loading />
+      <GameCount />
     </div>
   );
 }
