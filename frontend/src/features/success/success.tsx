@@ -10,7 +10,7 @@ function Success() {
     return (
         <Box>
             <Typography variant='h2'>{isCorrect ? 'Correct!' : 'Incorrect!'}</Typography>
-            {isCorrect ? null : <Typography variant='h5'>The correct answer was "{correctAlgo}".</Typography>}
+            <Typography variant='h5'>{isCorrect ? "Good job! That was a " : "The correct answer was: "} {correctAlgo}.</Typography>
         </Box>
 
     )
