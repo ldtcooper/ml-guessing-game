@@ -49,6 +49,14 @@ export const getProblem = createAsyncThunk(
     }
 );
 
+export const resetProblem = createAsyncThunk(
+    'guesser/reset',
+    async () => {
+        const resp = await fetchProblem();
+        return resp;
+    }
+);
+
 export const guesserSlice = createSlice({
     name: 'guesser',
     initialState,
@@ -82,6 +90,14 @@ export const guesserSlice = createSlice({
             .addCase(getProblem.fulfilled, (state, action) => {
                 state.graph = action.payload.graph;
                 state.id = action.payload.id;
+            })
+            .addCase(resetProblem.fulfilled, (state, action) => {
+                state.graph = action.payload.graph;
+                state.id = action.payload.id;
+                // these need to reset for the new game
+                state.answer = '';
+                state.correctAlgo = '';
+                state.isCorrect = null;
             })
     }
 });
