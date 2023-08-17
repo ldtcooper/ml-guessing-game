@@ -65,6 +65,15 @@ def get_answer_options():
     return Problem.get_answer_options()
 
 
+@app.route('/delete', methods=['DELETE'])
+def delete_question():
+    data = request.get_json()
+    g = db.session.query(Games).get(data["id"])
+    db.session.delete(g)
+    db.session.commit()
+    return {"deleted": data["id"]}
+
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
