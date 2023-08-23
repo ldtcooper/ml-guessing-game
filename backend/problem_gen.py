@@ -64,7 +64,7 @@ class Problem():
                 # "max_depth": [1, 2, 3, None]
             },
             "LogisticRegression": {
-                "penalty": [None, 'l1', 'l2'],
+                "penalty": ['None', 'l1', 'l2'],
                 "solver": ["saga"]
             },
             "SupportVectorMachine": {

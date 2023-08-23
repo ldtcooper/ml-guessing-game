@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectGuess, setAnswer, getAnswerCheck } from '../guesser/guesserSlice';
 
 function Dropdown() {
-    const { answer, options } = useAppSelector(selectGuess);
+    const { id, answer, options } = useAppSelector(selectGuess);
     const dispatch = useAppDispatch();
 
     return (
@@ -33,7 +33,7 @@ function Dropdown() {
                 </FormControl>
                 <Button
                     variant='outlined'
-                    onClick={() => { dispatch(getAnswerCheck({ id: -1, algo: answer })) }}
+                    onClick={() => { dispatch(getAnswerCheck({ id, algo: answer })) }}
                     disabled={answer === ''}
                 >
                     Submit

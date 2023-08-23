@@ -17,3 +17,7 @@ export interface CheckBody {
 export interface DeleteResponse {
     deleted: number
 }
+
+export interface DeleteBody {
+    id: number,
+}

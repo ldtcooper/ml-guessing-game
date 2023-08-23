@@ -1,13 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { Nullable, CheckBody } from "../../app/types";
-import { fetchAnswers, fetchProblem, checkAnswer } from "./guesserAPI";
+import { Nullable, CheckBody, DeleteBody } from "../../app/types";
+import { fetchAnswers, fetchProblem, checkAnswer, deleteGame } from "./guesserAPI";
 
 export interface GuesserState {
     options: Array<string>,
     answer: string,
     graph: Object,
-    id: Nullable<number>,
+    id: number,
     isCorrect: Nullable<boolean>,
     correctAlgo: string,
     gamesPlayed: number,
@@ -18,7 +18,7 @@ const initialState: GuesserState = {
     options: [],
     answer: '',
     graph: {},
-    id: null,
+    id: -1,
     isCorrect: null,
     correctAlgo: '',
     gamesPlayed: 0,

@@ -26,7 +26,10 @@ export function fetchProblem(): Promise<ProblemResponse> {
 export function checkAnswer(id: number, algo: string): Promise<CheckResponse> {
     return callApi('/check', {
         method: 'POST',
-        body: JSON.stringify({ id, algo })
+        body: JSON.stringify({ id, algo }),
+        headers: {
+            "Content-Type": "application/json",
+        }
     })
 }
 
@@ -34,5 +37,8 @@ export function deleteGame(id: number): Promise<number> {
     return callApi('/delete', {
         method: 'DELETE',
         body: JSON.stringify({ id }),
+        headers: {
+            "Content-Type": "application/json",
+        }
     })
 }

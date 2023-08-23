@@ -5,7 +5,6 @@ import { resetProblem } from '../guesser/guesserSlice';
 
 function PlayAgain() {
     const dispatch = useAppDispatch();
-
     return (
         <Button
             onClick={() => { dispatch(resetProblem()) }}
