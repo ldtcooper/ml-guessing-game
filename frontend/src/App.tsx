@@ -11,11 +11,16 @@ import { Typography } from '@mui/material';
 
 function App() {
   const dispatch = useAppDispatch();
+  let shouldLoad = true;
 
   useEffect(() => {
-    dispatch(getAnswerOptions());
-    dispatch(getProblem());
-  }, [dispatch]);
+    // stop multiple loads from happening
+    if (shouldLoad) {
+      shouldLoad = false;
+      dispatch(getAnswerOptions());
+      dispatch(getProblem());
+    }
+  }, []);
 
   return (
     <div className="App">

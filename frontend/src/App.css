@@ -47,3 +47,8 @@
   position: absolute;
   left: -999999999px;
 }
+
+#graph-container {
+  min-height: 480px;
+  min-width: 640px;
+}
