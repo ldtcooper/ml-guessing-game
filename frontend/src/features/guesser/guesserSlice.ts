@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Nullable, CheckBody } from "../../app/types";
-import { fetchAnswers, fetchProblem, checkAnswer } from "./guesserAPI";
+import { fetchAnswers, fetchProblem, checkAnswer, deleteGame } from "./guesserAPI";
 
 export interface GuesserState {
     options: Array<string>,
@@ -51,7 +51,8 @@ export const getProblem = createAsyncThunk(
 
 export const resetProblem = createAsyncThunk(
     'guesser/reset',
-    async () => {
+    async (id: number) => {
+        deleteGame(id)
         const resp = await fetchProblem();
         return resp;
     }

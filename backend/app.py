@@ -4,6 +4,7 @@ from problem_gen import Problem
 from dotenv import load_dotenv
 import os
 from utils import build_postgres_uri
+from datetime import datetime, timedelta
 
 load_dotenv()
 app = Flask(__name__)
@@ -21,13 +22,15 @@ class Games(db.Model):
     id = db.Column('game_id', db.Integer, primary_key=True)
     algo = db.Column(db.String(50))
     meta = db.Column(db.JSON())
+    created = db.Column(db.DateTime())
 
     def __init__(self, algo, meta):
         self.algo = algo
         self.meta = meta
+        self.created = datetime.now()
 
     def __repr__(self):
-        return f'Game {id}: {self.algo} -- {self.meta}'
+        return f'Game {id}: {self.algo} -- {self.meta} -- Created: {self.created}'
 
 
 with app.app_context():
@@ -54,8 +57,6 @@ def check_solution():
     data = request.get_json()
     g = db.session.query(Games).get(data["id"])
     resp = {"correct": data['algo'] == g.algo, "answer": g.algo}
-    db.session.delete(g)
-    db.session.commit()
     return resp
 
 
@@ -67,10 +68,18 @@ def get_answer_options():
 @app.route('/delete', methods=['DELETE'])
 def delete_question():
     data = request.get_json()
-    print(data)
+
+    # deletes both last game and stale games
     g = db.session.query(Games).get(data["id"])
-    db.session.delete(g)
+    els_to_delete = db.session.query(Games).filter(
+        Games.created <= (datetime.now() - timedelta(hours=24))).all()
+    els_to_delete.append(g)
+
+    for el in els_to_delete:
+        db.session.delete(el)
+
     db.session.commit()
+
     return {"deleted": data["id"]}
 
 
