@@ -86,7 +86,14 @@ class Problem():
 
     def make_decision_plot(self) -> str:
         disp = DecisionBoundaryDisplay.from_estimator(
-            estimator=self.model, X=self.X_train, alpha=0.5, xlabel="Feature One", ylabel="Feature Two", eps=0.11)
+            estimator=self.model,
+            X=self.X_train,
+            alpha=0.5,
+            xlabel="Feature One",
+            ylabel="Feature Two",
+            eps=0.11,
+            response_method='predict'
+        )
         disp.ax_.scatter(
             self.X_test[:, 0], self.X_test[:, 1], c=self.y_test, edgecolors='k')
         return mpld3.fig_to_dict(fig=disp.figure_)
