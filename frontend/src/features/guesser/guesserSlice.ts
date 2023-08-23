@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { Nullable, CheckBody, DeleteBody } from "../../app/types";
-import { fetchAnswers, fetchProblem, checkAnswer, deleteGame } from "./guesserAPI";
+import { Nullable, CheckBody } from "../../app/types";
+import { fetchAnswers, fetchProblem, checkAnswer } from "./guesserAPI";
 
 export interface GuesserState {
     options: Array<string>,
@@ -81,7 +81,7 @@ export const guesserSlice = createSlice({
             })
             .addCase(getAnswerCheck.fulfilled, (state, action) => {
                 state.isCorrect = action.payload.correct;
-                state.correctAlgo = action.payload.algo;
+                state.correctAlgo = action.payload.answer;
                 state.gamesPlayed += 1;
                 if (action.payload.correct) {
                     state.gamesWon += 1;

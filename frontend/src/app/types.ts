@@ -6,7 +6,7 @@ export interface ProblemResponse {
 }
 export interface CheckResponse {
     correct: boolean,
-    algo: string
+    answer: string
 }
 
 export interface CheckBody {
