@@ -45,7 +45,6 @@ def get_problem_graph():
     game = Games(*p.get_table_data())
     db.session.add(game)
     db.session.commit()
-    print(game)
     return {"graph": p.make_decision_plot(), "id": game.id}
 
 
@@ -53,7 +52,6 @@ def get_problem_graph():
 def check_solution():
     '''Takes request of form {id: int, algo: str} and returns whether that is correct'''
     data = request.get_json()
-    print(data)
     g = db.session.query(Games).get(data["id"])
     resp = {"correct": data['algo'] == g.algo, "answer": g.algo}
     db.session.delete(g)
@@ -69,6 +67,7 @@ def get_answer_options():
 @app.route('/delete', methods=['DELETE'])
 def delete_question():
     data = request.get_json()
+    print(data)
     g = db.session.query(Games).get(data["id"])
     db.session.delete(g)
     db.session.commit()

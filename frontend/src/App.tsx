@@ -3,17 +3,15 @@ import Header from "./features/header/Header";
 import Loading from "./features/loading/Loading";
 import './App.css';
 import Guesser from './features/guesser/Guesser';
-import { getAnswerOptions, getProblem, selectGuess } from './features/guesser/guesserSlice';
-import { useAppDispatch, useAppSelector } from './app/hooks';
+import { getAnswerOptions, getProblem } from './features/guesser/guesserSlice';
+import { useAppDispatch } from './app/hooks';
 import Score from './features/score/score';
 import { Typography } from '@mui/material';
-import { deleteGame } from './features/guesser/guesserAPI';
 
 
 function App() {
   const dispatch = useAppDispatch();
   let shouldLoad = true;
-  const { id } = useAppSelector(selectGuess);
 
   useEffect(() => {
     // stop multiple loads from happening
@@ -21,7 +19,6 @@ function App() {
       shouldLoad = false;
       dispatch(getAnswerOptions());
       dispatch(getProblem());
-      window.addEventListener('beforeunload', () => { deleteGame(id) })
     }
   }, []);
 
