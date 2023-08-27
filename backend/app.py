@@ -33,6 +33,9 @@ class Games(db.Model):
         return f'Game {id}: {self.algo} -- {self.meta} -- Created: {self.created}'
 
 
+with app.app_context():
+    db.create_all()
+
 # @app.route("/", methods=['GET'])
 # def serve_frontend():
 #     return "<h1>Hello World!</h1>"
@@ -58,7 +61,6 @@ def check_solution():
 
 @app.route('/api/answers', methods=['GET'])
 def get_answer_options():
-    print("ANSWERS REACHED!")
     return jsonify(Problem.get_answer_options())
 
 
@@ -81,5 +83,4 @@ def delete_question():
 
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
