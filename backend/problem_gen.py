@@ -52,9 +52,7 @@ class Problem():
         return train_test_split(X, y, train_size=0.8)
 
     def choose_algo(self) -> Tuple[str, BaseEstimator]:
-        c = choice(ALGO_CHOICES)
-        print(c)
-        return c
+        return choice(ALGO_CHOICES)
 
     def choose_hyperparams(self) -> Dict[str, HyperparamValue]:
         HYPERPARAMS = {
@@ -72,8 +70,8 @@ class Problem():
             },
             "NeuralNet": {
                 "activation": ["identity", "logistic", "tanh", "relu"],
-                "hidden_layer_sizes": [(2, 8, self.classes)]
-                # "learning_rate": ["constant", "invscaling", "adaptive"],
+                "hidden_layer_sizes": [(2, 8, 8, self.classes)],
+                "learning_rate": ["adaptive"]
             },
             "NaiveBayes": {},
         }
