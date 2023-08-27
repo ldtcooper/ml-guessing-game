@@ -14,6 +14,7 @@ Flask-Migrate==4.0.4
 flask-sqlalchemy==3.0.5
 fonttools==4.42.0
 greenlet==2.0.2
+gunicorn==21.2.0
 importlib-metadata==6.8.0
 importlib-resources==6.0.0
 ipykernel==6.25.0

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from problem_gen import Problem
 from dotenv import load_dotenv
@@ -11,8 +11,8 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = build_postgres_uri(
     user=os.getenv('POSTGRES_USER'),
-    password=os.getenv('POSTGRES_PASS'),
-    location='localhost'
+    password=os.getenv('POSTGRES_PASSWORD'),
+    location='db'
 )
 
 db = SQLAlchemy(app)
@@ -33,16 +33,12 @@ class Games(db.Model):
         return f'Game {id}: {self.algo} -- {self.meta} -- Created: {self.created}'
 
 
-with app.app_context():
-    db.create_all()
+# @app.route("/", methods=['GET'])
+# def serve_frontend():
+#     return "<h1>Hello World!</h1>"
 
 
-@app.route("/", methods=['GET'])
-def hello_world():
-    return "<h1>Hello World!</h1>"
-
-
-@app.route("/problem", methods=['GET'])
+@app.route("/api/problem", methods=['GET'])
 def get_problem_graph():
     p = Problem()
     game = Games(*p.get_table_data())
@@ -51,7 +47,7 @@ def get_problem_graph():
     return {"graph": p.make_decision_plot(), "id": game.id}
 
 
-@app.route('/check', methods=['POST'])
+@app.route('/api/check', methods=['POST'])
 def check_solution():
     '''Takes request of form {id: int, algo: str} and returns whether that is correct'''
     data = request.get_json()
@@ -60,12 +56,13 @@ def check_solution():
     return resp
 
 
-@app.route('/answers', methods=['GET'])
+@app.route('/api/answers', methods=['GET'])
 def get_answer_options():
-    return Problem.get_answer_options()
+    print("ANSWERS REACHED!")
+    return jsonify(Problem.get_answer_options())
 
 
-@app.route('/delete', methods=['DELETE'])
+@app.route('/api/delete', methods=['DELETE'])
 def delete_question():
     data = request.get_json()
 
@@ -85,4 +82,4 @@ def delete_question():
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

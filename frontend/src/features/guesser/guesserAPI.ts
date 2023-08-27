@@ -2,7 +2,7 @@ import { CheckResponse, ProblemResponse } from "../../app/types";
 
 async function callApi<T>(url: string, body: Object): Promise<T> {
     try {
-        const response = await fetch(url, body);
+        const response = await fetch(`/api${url}`, body);
 
         if (!response.ok) {
             throw new Error('API request failed');
