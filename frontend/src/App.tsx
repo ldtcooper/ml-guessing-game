@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from "./features/header/Header";
+import Footer from "./features/footer/footer";
 import Loading from "./features/loading/Loading";
 import './App.css';
 import Guesser from './features/guesser/Guesser';
@@ -29,10 +30,10 @@ function App() {
       <Loading />
       <Score />
       <Typography id='description' paragraph align='left' sx={{ margin: '2% 20%' }}>
-        Welcome to Modle! What you see above you is the <a href="https://en.wikipedia.org/wiki/Decision_boundary" target='_blank' rel='noreferrer'>decision boundary</a>
-        created by a machine learning algorithm and the data of the test set. Y
-        our job is to guess which algorithm generated that boundary. Good luck!
+        Welcome to Modle! What you see above you is the <a href="https://en.wikipedia.org/wiki/Decision_boundary" target='_blank' rel='noreferrer'>decision boundary</a>&nbsp;
+        created by a machine learning algorithm and the data of the test set. Your job is to guess which algorithm generated that boundary. Good luck!
       </Typography>
+      <Footer />
     </div>
   );
 }

@@ -52,3 +52,10 @@
   min-height: 480px;
   min-width: 640px;
 }
+
+footer {
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  padding: 2px;
+}
