@@ -10,7 +10,7 @@ export const store = configureStore({
     loading: loadingReducer,
     guesser: guesserReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()//.concat(logger),
 });
 
 export type AppDispatch = typeof store.dispatch;
