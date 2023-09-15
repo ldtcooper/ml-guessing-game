@@ -1,14 +1,17 @@
+databases:
+  - name: db
+    databaseName: mlguess
+    postgresMajorVersion: 14
+    
 services:
   - type: web
     name: frontend
     runtime: docker
-    dockerfile: frontend/Dockerfile
-    ports:
-      - 3000
+    dockerfile: ./frontend/Dockerfile
 
   - type: web
     name: backend
-    dockerfile: backend/Dockerfile
+    dockerfile: ./backend/Dockerfile
     ports:
       - 5000
     envVars:
@@ -18,10 +21,4 @@ services:
         value: POSTGRES_USER
       - key: POSTGRES_PASSWORD
         value: POSTGRES_PASSWORD
-    dependencies:
-      - name: db
-        ports:
-          - 5432
 
-databases:
-  - name: db
