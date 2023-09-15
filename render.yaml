@@ -7,13 +7,11 @@ services:
   - type: web
     name: frontend
     runtime: docker
-    dockerfile: ./frontend/Dockerfile
+    dockerfilePath: ./frontend/Dockerfile
 
   - type: web
     name: backend
-    dockerfile: ./backend/Dockerfile
-    ports:
-      - 5000
+    dockerfilePath: ./backend/Dockerfile
     envVars:
       - key: POSTGRES_DB
         value: POSTGRES_DB
