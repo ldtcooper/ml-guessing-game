@@ -1,45 +1,27 @@
 services:
-  - name: frontend
+  - type: web
+    name: frontend
+    runtime: docker
     dockerfile: frontend/Dockerfile
-    env: .env
     ports:
       - 3000
 
-  - name: backend
+  - type: web
+    name: backend
     dockerfile: backend/Dockerfile
-    env: .env
     ports:
       - 5000
     envVars:
       - key: POSTGRES_DB
-        from: POSTGRES_DB
+        value: POSTGRES_DB
       - key: POSTGRES_USER
-        from: POSTGRES_USER
+        value: POSTGRES_USER
       - key: POSTGRES_PASSWORD
-        from: POSTGRES_PASSWORD
+        value: POSTGRES_PASSWORD
     dependencies:
       - name: db
         ports:
           - 5432
 
+databases:
   - name: db
-    image: postgres:latest
-    env: .env
-    envVars:
-      - key: POSTGRES_DB
-        from: POSTGRES_DB
-      - key: POSTGRES_USER
-        from: POSTGRES_USER
-      - key: POSTGRES_PASSWORD
-        from: POSTGRES_PASSWORD
-
-  - name: nginx
-    image: nginx:latest
-    config: ./nginx.conf
-    ports:
-      - 80
-      - 443
-    dependencies:
-      - name: frontend
-        ports:
-          - 3000
