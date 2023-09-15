@@ -1,0 +1,45 @@
+services:
+  - name: frontend
+    dockerfile: frontend/Dockerfile
+    env: .env
+    ports:
+      - 3000
+
+  - name: backend
+    dockerfile: backend/Dockerfile
+    env: .env
+    ports:
+      - 5000
+    envVars:
+      - key: POSTGRES_DB
+        from: POSTGRES_DB
+      - key: POSTGRES_USER
+        from: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        from: POSTGRES_PASSWORD
+    dependencies:
+      - name: db
+        ports:
+          - 5432
+
+  - name: db
+    image: postgres:latest
+    env: .env
+    envVars:
+      - key: POSTGRES_DB
+        from: POSTGRES_DB
+      - key: POSTGRES_USER
+        from: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+        from: POSTGRES_PASSWORD
+
+  - name: nginx
+    image: nginx:latest
+    config: ./nginx.conf
+    ports:
+      - 80
+      - 443
+    dependencies:
+      - name: frontend
+        ports:
+          - 3000
