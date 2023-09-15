@@ -11,12 +11,6 @@ services:
 
   - type: web
     name: backend
+    runtime: docker
     dockerfilePath: ./backend/Dockerfile
-    envVars:
-      - key: POSTGRES_DB
-        value: POSTGRES_DB
-      - key: POSTGRES_USER
-        value: POSTGRES_USER
-      - key: POSTGRES_PASSWORD
-        value: POSTGRES_PASSWORD
 
