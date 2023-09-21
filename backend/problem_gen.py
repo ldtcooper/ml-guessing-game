@@ -62,7 +62,7 @@ class Problem():
                 # "max_depth": [1, 2, 3, None]
             },
             "LogisticRegression": {
-                "penalty": ['None', 'l1', 'l2'],
+                "penalty": ['l1', 'l2'],
                 "solver": ["saga"]
             },
             "SupportVectorMachine": {
@@ -70,7 +70,7 @@ class Problem():
             },
             "NeuralNet": {
                 "activation": ["identity", "logistic", "tanh", "relu"],
-                "hidden_layer_sizes": [(2, 8, 8, self.classes)],
+                "hidden_layer_sizes": [(2, 16, 16, self.classes)],
                 "learning_rate": ["adaptive"]
             },
             "NaiveBayes": {},

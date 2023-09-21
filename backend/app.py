@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from problem_gen import Problem
 from dotenv import load_dotenv
@@ -7,12 +7,17 @@ from utils import build_postgres_uri
 from datetime import datetime, timedelta
 
 load_dotenv()
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../frontend/build',
+    template_folder='../frontend/build'
+)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = build_postgres_uri(
     user=os.getenv('POSTGRES_USER'),
     password=os.getenv('POSTGRES_PASSWORD'),
-    location='db'
+    location=os.getenv('POSTGRES_LOCATION')
 )
 
 db = SQLAlchemy(app)
@@ -36,9 +41,10 @@ class Games(db.Model):
 with app.app_context():
     db.create_all()
 
-# @app.route("/", methods=['GET'])
-# def serve_frontend():
-#     return "<h1>Hello World!</h1>"
+
+@app.route("/", methods=['GET'])
+def serve_frontend():
+    return render_template("index.html")
 
 
 @app.route("/api/problem", methods=['GET'])
