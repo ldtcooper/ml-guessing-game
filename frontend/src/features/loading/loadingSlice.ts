@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { getAnswerOptions, getProblem, getAnswerCheck } from "../guesser/guesserSlice";
+import { getAnswerOptions, getProblem, getAnswerCheck, resetProblem } from "../guesser/guesserSlice";
 
 export interface LoadingState {
     loading: boolean,
@@ -36,6 +36,12 @@ export const loadingSlice = createSlice({
                 state.loading = true;
             })
             .addCase(getAnswerCheck.fulfilled, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(resetProblem.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(resetProblem.fulfilled, (state, action) => {
                 state.loading = false;
             })
     }
