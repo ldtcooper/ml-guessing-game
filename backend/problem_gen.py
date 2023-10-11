@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.base import BaseEstimator
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
@@ -25,7 +26,8 @@ ALGO_CHOICES = [
     ("LogisticRegression", LogisticRegressionCV),
     ("SupportVectorMachine", SVC),
     ("NeuralNet", MLPClassifier),
-    ("NaiveBayes", GaussianNB)
+    ("NaiveBayes", GaussianNB),
+    ("KNN", KNeighborsClassifier)
 ]
 
 
@@ -69,11 +71,15 @@ class Problem():
                 "kernel": ["linear", "poly", "rbf", "sigmoid"],
             },
             "NeuralNet": {
-                "activation": ["identity", "logistic", "tanh", "relu"],
+                "activation": ["identity", "tanh", "relu"],
                 "hidden_layer_sizes": [(2, 16, 16, self.classes)],
                 "learning_rate": ["adaptive"]
             },
             "NaiveBayes": {},
+            "KNN": {
+                "n_neighbors": [1, 2, 3, 4, 5, 10, 15],
+                "weights": ["uniform", "distance"]
+            },
         }
 
         hyperparams_set = HYPERPARAMS[self.algo]
