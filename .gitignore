@@ -188,3 +188,4 @@ yarn-error.log*
 
 frontend/node_modules
 init.sql
+notebook.ipynb
