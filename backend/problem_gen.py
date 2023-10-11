@@ -24,8 +24,10 @@ ALGO_CHOICES = [
     ("AdaBoost (Boosted Trees)", AdaBoostClassifier),
     ("Decision Tree", DecisionTreeClassifier),
     ("Logistic Regression", LogisticRegressionCV),
-    ("Support Vector Machine", SVC),
-    ("Feed-Forward Neural Net", MLPClassifier),
+    ("Polynomial Kernel Support Vector Machine", SVC),
+    ("RBF Kernel Support Vector Machine", SVC),
+    ("Linear Feed-Forward Neural Net", MLPClassifier),
+    ("Non-Linear Feed-Forward Neural Net", MLPClassifier),
     ("Naive Bayes", GaussianNB),
     ("K-Nearest-Neighbors", KNeighborsClassifier)
 ]
@@ -67,12 +69,21 @@ class Problem():
                 "penalty": ['l1', 'l2'],
                 "solver": ["saga"]
             },
-            "Support Vector Machine": {
-                "kernel": ["linear", "poly", "rbf", "sigmoid"],
+            "Polynomial Kernel Support Vector Machine": {
+                "kernel": ["poly"],
+                "degree": [2, 3, 4, 5]
             },
-            "Feed-Forward Neural Net": {
-                "activation": ["identity", "tanh", "relu"],
-                "hidden_layer_sizes": [(2, 16, 16, self.classes)],
+            "RBF Kernel Support Vector Machine": {
+                "kernel": ["rbf"],
+            },
+            "Linear Feed-Forward Neural Net": {
+                "activation": ["identity"],
+                "hidden_layer_sizes": [(2, 16, 16, self.classes), (2, 8, 8, 8, self.classes)],
+                "learning_rate": ["adaptive"]
+            },
+            "Non-Linear Feed-Forward Neural Net": {
+                "activation": ["tanh", "relu"],
+                "hidden_layer_sizes": [(2, 16, 16, self.classes), (2, 8, 8, 8, self.classes)],
                 "learning_rate": ["adaptive"]
             },
             "Naive Bayes": {},
