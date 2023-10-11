@@ -21,13 +21,13 @@ import mpld3
 HyperparamValue = Union[str, int, float, None]
 
 ALGO_CHOICES = [
-    ("AdaBoost", AdaBoostClassifier),
-    ("DecisionTree", DecisionTreeClassifier),
-    ("LogisticRegression", LogisticRegressionCV),
-    ("SupportVectorMachine", SVC),
-    ("NeuralNet", MLPClassifier),
-    ("NaiveBayes", GaussianNB),
-    ("KNN", KNeighborsClassifier)
+    ("AdaBoost (Boosted Trees)", AdaBoostClassifier),
+    ("Decision Tree", DecisionTreeClassifier),
+    ("Logistic Regression", LogisticRegressionCV),
+    ("Support Vector Machine", SVC),
+    ("Feed-Forward Neural Net", MLPClassifier),
+    ("Naive Bayes", GaussianNB),
+    ("K-Nearest-Neighbors", KNeighborsClassifier)
 ]
 
 
@@ -58,25 +58,25 @@ class Problem():
 
     def choose_hyperparams(self) -> Dict[str, HyperparamValue]:
         HYPERPARAMS = {
-            "AdaBoost": {},
-            "DecisionTree": {
+            "AdaBoost (Boosted Trees)": {},
+            "Decision Tree": {
                 "criterion": ["gini", "entropy", "log_loss"],
                 # "max_depth": [1, 2, 3, None]
             },
-            "LogisticRegression": {
+            "Logistic Regression": {
                 "penalty": ['l1', 'l2'],
                 "solver": ["saga"]
             },
-            "SupportVectorMachine": {
+            "Support Vector Machine": {
                 "kernel": ["linear", "poly", "rbf", "sigmoid"],
             },
-            "NeuralNet": {
+            "Feed-Forward Neural Net": {
                 "activation": ["identity", "tanh", "relu"],
                 "hidden_layer_sizes": [(2, 16, 16, self.classes)],
                 "learning_rate": ["adaptive"]
             },
-            "NaiveBayes": {},
-            "KNN": {
+            "Naive Bayes": {},
+            "K-Nearest-Neighbors": {
                 "n_neighbors": [1, 2, 3, 4, 5, 10, 15],
                 "weights": ["uniform", "distance"]
             },
