@@ -15,7 +15,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-import matplotlib.pyplot as plt
 import mpld3
 
 HyperparamValue = Union[str, int, float, None]
@@ -67,14 +66,17 @@ class Problem():
             },
             "Logistic Regression": {
                 "penalty": ['l1', 'l2'],
-                "solver": ["saga"]
+                "solver": ["saga"],
+                "multi_class": ['ovr'],
             },
             "Polynomial Kernel Support Vector Machine": {
                 "kernel": ["poly"],
-                "degree": [2, 3, 4, 5]
+                "degree": [2, 3, 4, 5],
+                "multi_class": ['ovr'],
             },
             "RBF Kernel Support Vector Machine": {
                 "kernel": ["rbf"],
+                "multi_class": ['ovr'],
             },
             "Linear Feed-Forward Neural Net": {
                 "activation": ["identity"],
