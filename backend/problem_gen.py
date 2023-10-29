@@ -36,10 +36,6 @@ ALGO_CHOICES = [
 
 class Problem():
     def __init__(self) -> None:
-        seed = int(time())
-        seed(seed)
-        np.random.seed(seed)
-
         self.classes = randint(2, 4)
         self.algo, self.model = self.choose_algo()
         print(self.algo)
@@ -73,7 +69,6 @@ class Problem():
 
     def generate_data(self) -> Tuple[np.ndarray]:
         generator, arguments = self.choose_data_generator()
-
         X, y = generator(
             n_samples=1000,
             **arguments
