@@ -1,8 +1,10 @@
-from typing import Tuple, Dict, Union, List
-from random import randint, choice
+from typing import Tuple, Dict, Union, List, Any
+from random import randint, choice, uniform, seed
+from time import time
+
 import numpy as np
 
-from sklearn.datasets import make_classification
+from sklearn.datasets import make_classification, make_gaussian_quantiles, make_moons
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
@@ -15,19 +17,20 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
-import matplotlib.pyplot as plt
 import mpld3
 
 HyperparamValue = Union[str, int, float, None]
 
 ALGO_CHOICES = [
-    ("AdaBoost", AdaBoostClassifier),
-    ("DecisionTree", DecisionTreeClassifier),
-    ("LogisticRegression", LogisticRegressionCV),
-    ("SupportVectorMachine", SVC),
-    ("NeuralNet", MLPClassifier),
-    ("NaiveBayes", GaussianNB),
-    ("KNN", KNeighborsClassifier)
+    ("AdaBoost (Boosted Trees)", AdaBoostClassifier),
+    ("Decision Tree", DecisionTreeClassifier),
+    ("Logistic Regression", LogisticRegressionCV),
+    ("Polynomial Kernel Support Vector Machine", SVC),
+    ("RBF Kernel Support Vector Machine", SVC),
+    ("Linear Feed-Forward Neural Net", MLPClassifier),
+    ("Non-Linear Feed-Forward Neural Net", MLPClassifier),
+    ("Naive Bayes", GaussianNB),
+    ("K-Nearest-Neighbors", KNeighborsClassifier)
 ]
 
 
@@ -35,19 +38,40 @@ class Problem():
     def __init__(self) -> None:
         self.classes = randint(2, 4)
         self.algo, self.model = self.choose_algo()
+        print(self.algo)
         self.hyperparams = self.choose_hyperparams()
         self.X_train, self.X_test, self.y_train, self.y_test = self.generate_data()
         self.model = self.train_model()
 
+    def choose_data_generator(self) -> Tuple[callable, Dict[str, Any]]:
+        DATA_GENERATORS = [
+            (make_classification, {
+                'n_features': 2,
+                'n_informative': 2,
+                'n_redundant': 0,
+                'n_repeated': 0,
+                'n_clusters_per_class': 1,
+                'n_classes': self.classes
+            }),
+            (make_moons, {
+                'noise': uniform(0, 1)
+            }),
+            (
+                make_gaussian_quantiles,
+                {
+                    'n_features': 2,
+                    'n_classes': self.classes
+                }
+            )
+        ]
+
+        return choice(DATA_GENERATORS)
+
     def generate_data(self) -> Tuple[np.ndarray]:
-        X, y = make_classification(
+        generator, arguments = self.choose_data_generator()
+        X, y = generator(
             n_samples=1000,
-            n_classes=self.classes,
-            n_features=2,
-            n_informative=2,
-            n_redundant=0,
-            n_repeated=0,
-            n_clusters_per_class=1
+            **arguments
         )
         X = MinMaxScaler().fit_transform(X)
 
@@ -58,25 +82,35 @@ class Problem():
 
     def choose_hyperparams(self) -> Dict[str, HyperparamValue]:
         HYPERPARAMS = {
-            "AdaBoost": {},
-            "DecisionTree": {
+            "AdaBoost (Boosted Trees)": {},
+            "Decision Tree": {
                 "criterion": ["gini", "entropy", "log_loss"],
                 # "max_depth": [1, 2, 3, None]
             },
-            "LogisticRegression": {
+            "Logistic Regression": {
                 "penalty": ['l1', 'l2'],
-                "solver": ["saga"]
+                "solver": ["saga"],
+                "multi_class": ['ovr'],
             },
-            "SupportVectorMachine": {
-                "kernel": ["linear", "poly", "rbf", "sigmoid"],
+            "Polynomial Kernel Support Vector Machine": {
+                "kernel": ["poly"],
+                "degree": [2, 3, 4, 5],
             },
-            "NeuralNet": {
-                "activation": ["identity", "tanh", "relu"],
-                "hidden_layer_sizes": [(2, 16, 16, self.classes)],
+            "RBF Kernel Support Vector Machine": {
+                "kernel": ["rbf"],
+            },
+            "Linear Feed-Forward Neural Net": {
+                "activation": ["identity"],
+                "hidden_layer_sizes": [(8, 8), (8, 8, 8), (16, 16), (16)],
                 "learning_rate": ["adaptive"]
             },
-            "NaiveBayes": {},
-            "KNN": {
+            "Non-Linear Feed-Forward Neural Net": {
+                "activation": ["tanh", "relu"],
+                "hidden_layer_sizes": [(8, 8), (8, 8, 8), (16, 16), (16)],
+                "learning_rate": ["adaptive"]
+            },
+            "Naive Bayes": {},
+            "K-Nearest-Neighbors": {
                 "n_neighbors": [1, 2, 3, 4, 5, 10, 15],
                 "weights": ["uniform", "distance"]
             },
