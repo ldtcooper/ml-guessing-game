@@ -30,7 +30,7 @@ function App() {
       <Loading />
       <Score />
       <Typography id='description' paragraph align='left' sx={{ margin: '2% 20%' }}>
-        Welcome to Modle! What you see above you is the <a href="https://en.wikipedia.org/wiki/Decision_boundary" target='_blank' rel='noreferrer'>decision boundary</a> created by a machine learning algorithm laid over the test set. Your job is to guess which algorithm generated that boundary. If you think an algorithm doesn't work with the number of classes you see, it's using the one-vs-rest technique. Good luck!
+        Welcome to Modle! What you see above you is the <a href="https://en.wikipedia.org/wiki/Decision_boundary" target='_blank' rel='noreferrer'>decision boundary</a> created by a machine learning algorithm laid over the test set. Your job is to guess which algorithm generated that boundary. Good luck!
       </Typography>
       <Footer />
     </div>

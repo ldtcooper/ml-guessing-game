@@ -21,3 +21,7 @@ export interface DeleteResponse {
 export interface DeleteBody {
     id: number,
 }
+
+export interface Explanations {
+    [key: string]: string;
+}
